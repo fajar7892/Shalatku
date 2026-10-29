@@ -38,7 +38,7 @@ class SalatKuViewModel : ViewModel() {
     @JvmName("updateRoundSize")
     fun setRoundSize(size: Int) {
         roundSize = size
-        tasbihCount = 0 // Reset hitungan saat target diubah, putaran tetap disimpan
+        tasbihCount = 0
     }
 
     fun togglePrayer(name: String) {
