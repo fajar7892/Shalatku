@@ -3,6 +3,7 @@ package com.example.shalatku
 data class Prayer(val name: String, val time: String)
 
 val samplePrayers = listOf(
+    // --- HARI 1 ---
     Prayer("Subuh", "04:35"),
     Prayer("Dzuhur", "11:50"),
     Prayer("Ashar", "15:10"),
