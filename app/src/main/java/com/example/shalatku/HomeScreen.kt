@@ -13,28 +13,40 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun HomeScreen(
-    prayers: List<Prayer>,
+    prayerTimes: PrayerTimesUiState,
+    onRefreshPrayerTimes: () -> Unit,
     selectedDay: Int = 0,
     onSelectDay: (Int) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier.padding(16.dp)) {
         Text("Shalatku", style = MaterialTheme.typography.headlineMedium)
-        Text("Today's prayer times", style = MaterialTheme.typography.bodyMedium)
+        Text("Aplikasi Penulisan Interaktif Pertama", style = MaterialTheme.typography.bodyMedium)
         Spacer(Modifier.height(16.dp))
-        prayers.forEach { prayer -> PrayerCard(prayer) }
+
+        PrayerTimesSection(
+            state = prayerTimes,
+            onRefresh = onRefreshPrayerTimes
+        )
     }
 }
 
 @Composable
 fun PrayerCard(prayer: Prayer) {
-    Card(Modifier.fillMaxWidth().padding(vertical = 4.dp)) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 4.dp)
+    ) {
         Row(
-            Modifier.fillMaxWidth().padding(16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -42,4 +54,13 @@ fun PrayerCard(prayer: Prayer) {
             Text(prayer.time, style = MaterialTheme.typography.titleMedium)
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun HomeScreenPreview() {
+    HomeScreen(
+        prayerTimes = PrayerTimesUiState.Success(samplePrayers),
+        onRefreshPrayerTimes = {}
+    )
 }
